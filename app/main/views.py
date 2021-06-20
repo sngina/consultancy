@@ -11,7 +11,8 @@ from app.main import forms
 
 @main.route('/')
 def index():
-    blog = Blog.get_blogs()
+    blog = Blog.query.all()
+
     title = 'Home'
 
     return render_template('home.html' , title = title)

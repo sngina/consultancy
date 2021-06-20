@@ -17,7 +17,7 @@ class User(UserMixin ,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     pass_secure = db.Column(db.String(255))
-    blog = db.relationship('block', backref='user', lazy='dynamic')
+    blog = db.relationship('Blog', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
 
     @property
@@ -36,12 +36,12 @@ class User(UserMixin ,db.Model):
 
 # the blog function
 class Blog(db.Model):
-    __table__ = 'blog'
+    __tablename__ = 'blog'
     id = db.Column(db.Integer, primary_key = True)
-    owner_id = db.Column(db.Integer ,db.ForeignKey('user.id'),nullable = False)
+    owner_id = db.Column(db.Integer ,db.ForeignKey('users.id'),nullable = False)
     title = db.Column(db.String(),index = True)
-    comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
-    delete = db.relationship('Delete', backref = 'delete' , lazy = 'dynamic')
+    comment = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
+
    # the saving function
     def save_blog(self):
         db.session.add(self)
@@ -59,7 +59,7 @@ class Comment(db.Model):
     __tablename__='comments'
     
     id = db.Column(db.Integer,primary_key=True)
-    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'), nullable=False)
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
     comment = db.Column(db.String(2000))
     # saving comments
