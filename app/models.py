@@ -39,7 +39,7 @@ class Blog(db.Model):
     __table__ = 'blog'
     id = db.Column(db.Integer, primary_key = True)
     owner_id = db.Column(db.Integer ,db.ForeignKey('user.id'),nullable = False)
-    description = db.Column(db.String(),index = True)
+    title = db.Column(db.String(),index = True)
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     delete = db.relationship('Delete', backref = 'delete' , lazy = 'dynamic')
    # the saving function
