@@ -33,3 +33,23 @@ def new_blog():
         return redirect(url_for('main.index'))
 
     return render_template('blog.html' , form = form)
+
+
+@main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
+@login_required
+def new_comment(blog_id):
+    form = CommentForm()
+    blog= Blog.query.get(blog_id)
+    if form.validate_on_submit():
+        description = form.description.data
+
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id,blog_id = blog_id)
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return redirect(url_for('.new_comment' ,blog_id = blog_id))
+    all_comments = Comment.query.filter_by(blog_id = blog_id).all()
+    return render_template('comments.html', form = form, comment = all_comments, blog = blog )
+
+
+
