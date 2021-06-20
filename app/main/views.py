@@ -7,7 +7,7 @@ from ..models import User ,Blog, Comment
 from flask_login import login_required , current_user
 from .. import db
 from .forms import BlogForm , CommentForm
-
+from app.main import forms
 
 @main.route('/')
 def index():
