@@ -1,3 +1,4 @@
+from sqlalchemy.orm import session
 from . import db
 from sqlalchemy.sql import func
 from . import login_manager
@@ -41,6 +42,10 @@ class Blog(db.Model):
     description = db.Column(db.String(),index = True)
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     delete = db.relationship('Delete', backref = 'delete' , lazy = 'dynamic')
+   # the saving function
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
 
     @classmethod
     def get_blogs(cls, id):
@@ -54,11 +59,14 @@ class Comment(db.Model):
     __tablename__='comments'
     
     id = db.Column(db.Integer,primary_key=True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('blogs.id'), nullable=False)
+    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
-    description = db.Column(db.Text)
-
-    
+    comment = db.Column(db.String(2000))
+    # saving comments
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+ 
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
 
