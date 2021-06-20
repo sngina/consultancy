@@ -1,3 +1,4 @@
+from werkzeug.utils import redirect
 from ..import auth
 from ..auth.forms import LoginForm
 from flask import render_template , request ,url_for ,abort
@@ -28,3 +29,7 @@ def new_blog():
         new_blog = Blog(owner_id = current_user._get_current_object().id,title = title , description = description)
         db.session.add(new_blog)
         db.session.commit()
+
+        return redirect(url_for('main.index'))
+
+    return render_template('blog.html' , form = form)
