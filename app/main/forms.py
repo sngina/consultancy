@@ -13,3 +13,4 @@ class CommentForm(FlaskForm):
 	description = TextAreaField('Add comment',validators=[Required()])
 	submit = SubmitField()
 
+
