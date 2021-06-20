@@ -2,7 +2,7 @@ from . import db
 from sqlalchemy.sql import func
 from . import login_manager
 from flask_login import UserMixin, current_user
-# from werkzeug.security import generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -31,4 +31,21 @@ class User(UserMixin ,db.Model):
 
     def __repr__(self):
         return f'{self.username}'
+
+# the blog function
+class Blog(db.Model):
+    __table__ = 'blog'
+    id = db.Column(db.Integer, primary_key = True)
+    owner_id = db.Column(db.Integer ,db.ForeignKey('user.id'),nullable = False)
+    description = db.Column(db.String(),index = True)
+    comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
+    delete = db.relationship('Delete', backref = 'delete' , lazy = 'dynamic')
+
+    @classmethod
+    def get_blogs(cls, id):
+        blogs = Blog.query.order_by(blog_id=id).desc().all()
+        return blogs
+
+    def __repr__(self):
+        return f'Blog {self.description}'
 
