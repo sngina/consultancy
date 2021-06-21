@@ -3,8 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from config import config_options
 from flask_login import LoginManager
 from flask_simplemde import SimpleMDE
-from flask_mail import Mail
+from flask_mail import Message
 from flask_bootstrap import Bootstrap
+from flask import render_template
+from . import Mail
+
 
 db = SQLAlchemy()
 
@@ -26,6 +29,8 @@ def create_app(config_name):
     login_manager.init_app(app)
     bootstrap.init_app(app)
     simple.init_app(app)
+    mail.init_app(app)
+
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
