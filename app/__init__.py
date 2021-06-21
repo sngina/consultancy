@@ -3,10 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from config import config_options
 from flask_login import LoginManager
 from flask_simplemde import SimpleMDE
-from flask_mail import Message
+from flask_mail import Message , Mail
 from flask_bootstrap import Bootstrap
 from flask import render_template
-from . import Mail
 
 
 db = SQLAlchemy()

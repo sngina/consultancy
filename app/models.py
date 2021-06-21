@@ -71,4 +71,8 @@ class Comment(db.Model):
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
 
+class  Quotes():
+   def __init__(self,author,quotes):
+       self.author = author
+       self.quotes = quotes
 

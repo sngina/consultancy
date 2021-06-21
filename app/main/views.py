@@ -1,3 +1,4 @@
+from email.utils import quote
 from werkzeug.utils import redirect
 from ..import auth
 from ..auth.forms import LoginForm
@@ -8,14 +9,16 @@ from flask_login import login_required , current_user
 from .. import db
 from .forms import BlogForm , CommentForm
 from app.main import forms
+from ..request import get_quotes
 
 @main.route('/')
 def index():
     blog = Blog.query.all()
 
     title = 'Home'
-
-    return render_template('home.html' , title = title)
+    quotes = get_quotes()
+    print(quotes.author)
+    return render_template('home.html' , title = title ,quotes = quotes )
 
 
 @main.route('/pitches/new/', methods = ['GET','POST'])
