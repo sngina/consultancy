@@ -17,8 +17,8 @@ def index():
 
     title = 'Home'
     quotes = get_quotes()
-    print(quotes.author)
-    return render_template('home.html' , title = title ,quotes = quotes )
+    
+    return render_template('home.html' , title = title ,quotes = quotes,blogs = blog )
 
 
 @main.route('/pitches/new/', methods = ['GET','POST'])
@@ -30,7 +30,7 @@ def new_blog():
         content = form.content.data
         title = form.title.data
         print(title)
-        new_blog = Blog(title = title , content = content)
+        new_blog = Blog(title = title , content = content ,owner_id = current_user.id)
         db.session.add(new_blog)
         db.session.commit()
 
@@ -42,12 +42,12 @@ def new_blog():
 @main.route('/comment/new/<int:blog_id>', methods = ['GET','POST'])
 @login_required
 def new_comment(blog_id):
-    form = CommentForm()
+    commentform = CommentForm()
     blog= Blog.query.get(blog_id)
-    if form.validate_on_submit():
-        comment = form.comment.data
+    if commentform.validate_on_submit():
+        comment = commentform.description.data
 
-        new_comment = Comment(comment = comment, user_id = current_user._get_current_object().id,blog_id = blog_id)
+        new_comment = Comment(comment = comment, user_id = current_user.id,blog_id = blog_id)
         new_comment.save_comment()
 
         db.session.add(new_comment)
@@ -55,7 +55,7 @@ def new_comment(blog_id):
 
         return redirect(url_for('.new_comment' ,blog_id = blog_id))
     all_comments = Comment.query.filter_by(blog_id = blog_id).all()
-    return render_template('comments.html', form = form, comment = all_comments, blog = blog )
+    return render_template('comments.html', form = commentform, comment = all_comments, blog = blog )
 
 
 

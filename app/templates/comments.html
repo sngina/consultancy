@@ -5,7 +5,11 @@
 {% import 'macros.html' as macro %}
 
 {% block content %}
-<div class="container">
-    {{ wtf.quick_form(form) }}
+<div class="container blog">
+    {{wtf.quick_form(form)}}
+    {%for item in comment %}
+    <p>{{item.id}}</p>
+    <p>{{item.comment}}</p>
+    {%endfor%}
 </div>
 {% endblock %}
