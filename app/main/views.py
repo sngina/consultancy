@@ -27,10 +27,10 @@ def new_blog():
     form = BlogForm()
 
     if form.validate_on_submit():
-        description = form.description.data
+        content = form.content.data
         title = form.title.data
-        owner_id = current_user
-        new_blog = Blog(owner_id = current_user._get_current_object().id,title = title , description = description)
+        print(title)
+        new_blog = Blog(title = title , content = content)
         db.session.add(new_blog)
         db.session.commit()
 
@@ -45,9 +45,11 @@ def new_comment(blog_id):
     form = CommentForm()
     blog= Blog.query.get(blog_id)
     if form.validate_on_submit():
-        description = form.description.data
+        comment = form.comment.data
 
-        new_comment = Comment(description = description, user_id = current_user._get_current_object().id,blog_id = blog_id)
+        new_comment = Comment(comment = comment, user_id = current_user._get_current_object().id,blog_id = blog_id)
+        new_comment.save_comment()
+
         db.session.add(new_comment)
         db.session.commit()
 
