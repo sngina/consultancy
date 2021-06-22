@@ -63,6 +63,14 @@ def deleteComment(id):
     db.session.delete(todele)
     db.session.commit()
     return redirect(url_for('main.index'))
+# function of deleting blog
+@main.route('/delete/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def deleteBlog(id):
+    todele = Blog.query.filter_by(id = id).first()
+    db.session.delete(todele)
+    db.session.commit()
+    return redirect(url_for('main.index'))
 
 
 

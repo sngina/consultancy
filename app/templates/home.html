@@ -12,7 +12,8 @@
   <p>{{item.title}}</p>
   <p>{{item.content}}</p>
   <a  href="{{ url_for('main.new_comment', blog_id= item.id) }}"> <button>Comment</button> </a>
-  
+  <a href="{{ url_for('main.deleteBlog', id= item.id) }}"><button>Delete</button></a>
+
   {%endfor%}a
   {{quotes.author}}
   {{quotes.quotes}}
