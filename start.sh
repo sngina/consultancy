@@ -1,4 +1,4 @@
-export SECRET_KEY = 'YOUcantHackThis'
+export SECRET_KEY = 'you=cant=hackthis'
 export MAIL_USERNAME='stella.kimaru@student.moringaschool.com'
 export MAIL_PASSWORD='kimaru@2015!'
 

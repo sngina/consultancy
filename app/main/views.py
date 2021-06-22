@@ -67,7 +67,10 @@ def deleteComment(id):
 @main.route('/delete/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def deleteBlog(id):
-    todele = Blog.query.filter_by(id = id).first()
+    todele =Blog.query.filter_by(id=id).delete()
+    if todele is None:
+        abort(404)
+        
     db.session.delete(todele)
     db.session.commit()
     return redirect(url_for('main.index'))

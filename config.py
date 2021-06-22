@@ -2,7 +2,7 @@ import os
 
 
 class Config:
-    SECRET_KEY = 'youcanthackthis'
+    SECRET_KEY = 'you=cant=hackthis'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
