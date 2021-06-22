@@ -12,7 +12,7 @@
   <p>{{item.title}}</p>
   <p>{{item.content}}</p>
   <a  href="{{ url_for('main.new_comment', blog_id= item.id) }}"> <button>Comment</button> </a>
-   
+  
   {%endfor%}a
   {{quotes.author}}
   {{quotes.quotes}}

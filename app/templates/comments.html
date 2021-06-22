@@ -8,8 +8,14 @@
 <div class="container blog">
     {{wtf.quick_form(form)}}
     {%for item in comment %}
-    <p>{{item.id}}</p>
-    <p>{{item.comment}}</p>
+
+    <p>{{ item.id }}</p>
+    <p>{{ item.comment }}</p>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.deleteComment', id= item.id) }}"><button>Delete</button></a>
+    {%else%}
+    <p>.</p>
+    {% endif %}
     {%endfor%}
 </div>
 {% endblock %}

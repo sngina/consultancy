@@ -56,13 +56,13 @@ def new_comment(blog_id):
         return redirect(url_for('.new_comment' ,blog_id = blog_id))
     all_comments = Comment.query.filter_by(blog_id = blog_id).all()
     return render_template('comments.html', form = commentform, comment = all_comments, blog = blog )
-@main.route('/', methods = ['GET','POST'])
+@main.route('/delete/new/<int:id>', methods = ['GET','POST'])
 @login_required
-def deleteComment():
-    delete = Comment.query.get()
-    db.session.delete(delete)
+def deleteComment(id):
+    todele = Comment.query.filter_by(id = id).first()
+    db.session.delete(todele)
     db.session.commit()
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.index'))
 
 
 
