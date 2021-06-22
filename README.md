@@ -21,7 +21,7 @@ It is hosted by heroku
 
 ## SetUp
 This is a blog application that one can be able to view other people blogs and comment on it.
-https://one-minute-quote.herokuapp.com/
+https://nginablog.herokuapp.com/
 ### Cloning
 
 * In your terminal:
