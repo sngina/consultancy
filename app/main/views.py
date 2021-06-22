@@ -28,9 +28,9 @@ def new_blog():
 
     if form.validate_on_submit():
         content = form.content.data
-        title = form.title.data
-        print(title)
-        new_blog = Blog(title = title , content = content ,owner_id = current_user.id)
+        name = form.name.data
+        
+        new_blog = Blog(name = name , content = content ,owner_id = current_user.id)
         db.session.add(new_blog)
         db.session.commit()
 

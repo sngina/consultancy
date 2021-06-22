@@ -39,7 +39,7 @@ class Blog(db.Model):
     __tablename__ = 'blog'
     id = db.Column(db.Integer, primary_key = True)
     owner_id = db.Column(db.Integer ,db.ForeignKey('users.id'))
-    title = db.Column(db.String(),index = True)
+    name = db.Column(db.String(),index = True)
     content = db.Column(db.String())
     comment = db.relationship('Comment', backref = 'blog', lazy = 'dynamic')
 
