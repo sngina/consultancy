@@ -27,7 +27,7 @@ https://nginablog.herokuapp.com/
 * In your terminal:
         
         $ git clone ``
-        $ cd one-minute pitch
+        $ cd blog
 
 ## Running the Application
 
