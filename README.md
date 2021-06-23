@@ -13,7 +13,7 @@ This is a Blog application .
 ## Access the website
 Need the latest browser to be able to View
 
-Follow this link ''
+Follow this link 'https://github.com/changawa-antony/house-hunting.git'
 
 It is hosted by heroku
 
